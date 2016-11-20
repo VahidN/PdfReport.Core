@@ -1,0 +1,49 @@
+{
+    "version": "1.0.0-*",
+
+    "authors": [ "Vahid Nasiri" ],
+    "packOptions": {
+        "owners": [ "Vahid Nasiri" ],
+        "tags": [ "PdfReport", "Excel", "Export", "iTextSharp", "PDF", "Report", "Reporting", "Persian", ".NET Core", "aspnetcore" ],
+        "licenseUrl": "http://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html",
+        "projectUrl": "https://github.com/VahidN/PdfReport.Core"
+    },
+    "description": "PdfReport.Core is a code first reporting engine, which is built on top of the iTextSharp.LGPLv2.Core and EPPlus.Core libraries.",
+
+
+    "dependencies": {
+        "EPPlus.Core": "1.0.1",
+        "NETStandard.Library": "1.6.1",
+        "System.ComponentModel.Annotations": "4.3.0",
+        "System.Data.SqlClient": "4.3.0",
+        "System.Xml.XPath.XDocument": "4.3.0",
+        "Portable.BouncyCastle": "1.8.1.1",
+        "iTextSharp.LGPLv2.Core": "1.2.3"
+    },
+
+    "frameworks": {
+        "netstandard1.6": {
+            "imports": "dnxcore50"
+        }
+    },
+
+    "buildOptions": {
+        "xmlDoc": true,
+        "embed": "core/helper/srgb.profile"
+    },
+
+    "configurations": {
+        "Release": {
+            "buildOptions": {
+                "optimize": true,
+                "platform": "anycpu"
+            }
+        }
+    },
+
+    "scripts": {
+        "postcompile": [
+            "dotnet pack --no-build --configuration %compile:Configuration%"
+        ]
+    }
+}
