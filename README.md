@@ -13,10 +13,10 @@ Install via NuGet
 To install PdfReport, run the following command in the Package Manager Console:
 
 ```
-PM> Install-Package PdfReport.Core
+PM> Install-Package PdfRpt.Core 
 ```
 
-You can also view the [package page](http://www.nuget.org/packages/PdfReport.Core/) on NuGet.
+You can also view the [package page](https://www.nuget.org/packages/PdfRpt.Core/) on NuGet.
 
 
 
