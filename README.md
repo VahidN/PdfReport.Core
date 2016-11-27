@@ -59,3 +59,11 @@ Usage
 History
 -----------------
 The project used to be hosted in [CodePlex](https://pdfreport.codeplex.com) and has since been migrated [here](https://github.com/VahidN/PdfReport/).
+
+
+Note:
+-----------------
+To run this project on Linux, you will need to install `libgdiplus` too:
+```
+sudo apt-get updatesudo apt-get install libgdiplus
+```
