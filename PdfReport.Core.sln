@@ -1,20 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B878A6BD-830B-4C4E-B077-F6C492D5B5E1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8940BB5F-E6F5-4180-902E-586C25DEECA3}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PdfRpt.Core", "src\PdfRpt.Core\PdfRpt.Core.xproj", "{948A6F42-82FE-473D-94CE-4668A126C3BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfRpt.Core", "src\PdfRpt.Core\PdfRpt.Core.csproj", "{948A6F42-82FE-473D-94CE-4668A126C3BF}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "PdfRpt.Core.FunctionalTests", "src\PdfRpt.Core.FunctionalTests\PdfRpt.Core.FunctionalTests.xproj", "{099A85D6-E41D-4BA9-85F2-F3A714C651B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfRpt.Core.FunctionalTests", "src\PdfRpt.Core.FunctionalTests\PdfRpt.Core.FunctionalTests.csproj", "{099A85D6-E41D-4BA9-85F2-F3A714C651B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
