@@ -225,7 +225,6 @@ namespace PdfRpt.Core.FunctionalTests
         }
     }
 
-    [Serializable]
     public class ApprovalReport
     {
         public string ReportTitle { get { return "Лист согласования"; } }
@@ -244,7 +243,6 @@ namespace PdfRpt.Core.FunctionalTests
 
         public Guid InstanceId { get; set; }
 
-        [Serializable]
         public class Approval
         {
             public string Url { get; set; }

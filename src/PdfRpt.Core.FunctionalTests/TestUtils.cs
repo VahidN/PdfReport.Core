@@ -24,6 +24,12 @@ namespace PdfRpt.Core.FunctionalTests
             return Path.Combine(GetBaseDir(), "Images", fileName);
         }
 
+        public static string GetDataFilePath(string fileName)
+        {
+
+            return Path.Combine(GetBaseDir(), "Data", fileName);
+        }
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static string GetOutputFileName([CallerMemberName] string methodName = null)
         {
