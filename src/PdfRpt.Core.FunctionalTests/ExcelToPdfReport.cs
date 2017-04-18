@@ -96,7 +96,7 @@ namespace PdfRpt.Core.FunctionalTests
 
     public static class ExcelUtils
     {
-        public static IList<string> GetColums(string filePath, string excelWorksheet)
+        public static IList<string> GetColumns(string filePath, string excelWorksheet)
         {
             var fileInfo = new FileInfo(filePath);
             if (!fileInfo.Exists)
@@ -204,7 +204,7 @@ namespace PdfRpt.Core.FunctionalTests
                     });
 
                     var order = 1;
-                    foreach (var columnInfo in ExcelUtils.GetColums(filePath, excelWorksheet))
+                    foreach (var columnInfo in ExcelUtils.GetColumns(filePath, excelWorksheet))
                     {
                         columns.AddColumn(column =>
                         {
