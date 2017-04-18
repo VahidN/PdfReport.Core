@@ -94,6 +94,33 @@ namespace PdfRpt.Core.FunctionalTests
         }
     }
 
+    public static class ExcelUtils
+    {
+        public static IList<string> GetColums(string filePath, string excelWorksheet)
+        {
+            var fileInfo = new FileInfo(filePath);
+            if (!fileInfo.Exists)
+            {
+                throw new FileNotFoundException($"{filePath} file not found.");
+            }
+
+            var columns = new List<string>();
+            using (var package = new ExcelPackage(fileInfo))
+            {
+                var worksheet = package.Workbook.Worksheets[excelWorksheet];
+                var startCell = worksheet.Dimension.Start;
+                var endCell = worksheet.Dimension.End;
+
+                for (int col = startCell.Column; col <= endCell.Column; col++)
+                {
+                    var colHeader = worksheet.Cells[1, col].Value.ToString();
+                    columns.Add(colHeader);
+                }
+            }
+            return columns;
+        }
+    }
+
     [TestClass]
     public class ExcelToPdfReport
     {
@@ -102,11 +129,13 @@ namespace PdfRpt.Core.FunctionalTests
         {
             ExcelData.CreateSampleFile();
 
-            var report = CreateExcelToPdfReport();
+            var report = CreateExcelToPdfReport(
+                filePath: TestUtils.GetDataFilePath("sample.xlsx"),
+                excelWorksheet: "Sheet1");
             TestUtils.VerifyPdfFileIsReadable(report.FileName);
         }
 
-        public IPdfReportData CreateExcelToPdfReport()
+        public IPdfReportData CreateExcelToPdfReport(string filePath, string excelWorksheet)
         {
             return new PdfReport().DocumentPreferences(doc =>
                 {
@@ -159,10 +188,7 @@ namespace PdfRpt.Core.FunctionalTests
                 })
                 .MainTableDataSource(dataSource =>
                 {
-                    dataSource.CustomDataSource(() => new ExcelDataReaderDataSource(
-                        filePath: TestUtils.GetDataFilePath("sample.xlsx"),
-                        worksheet: "Sheet1"
-                        ));
+                    dataSource.CustomDataSource(() => new ExcelDataReaderDataSource(filePath, excelWorksheet));
                 })
                 .MainTableColumns(columns =>
                 {
@@ -177,25 +203,19 @@ namespace PdfRpt.Core.FunctionalTests
                         column.HeaderCell("#");
                     });
 
-                    columns.AddColumn(column =>
+                    var order = 1;
+                    foreach (var columnInfo in ExcelUtils.GetColums(filePath, excelWorksheet))
                     {
-                        column.PropertyName("User");
-                        column.CellsHorizontalAlignment(HorizontalAlignment.Center);
-                        column.IsVisible(true);
-                        column.Order(1);
-                        column.Width(2);
-                        column.HeaderCell("User");
-                    });
-
-                    columns.AddColumn(column =>
-                    {
-                        column.PropertyName("Path");
-                        column.CellsHorizontalAlignment(HorizontalAlignment.Center);
-                        column.IsVisible(true);
-                        column.Order(2);
-                        column.Width(3);
-                        column.HeaderCell("Path");
-                    });
+                        columns.AddColumn(column =>
+                        {
+                            column.PropertyName(columnInfo);
+                            column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                            column.IsVisible(true);
+                            column.Order(order++);
+                            column.Width(1);
+                            column.HeaderCell(columnInfo);
+                        });
+                    }
                 })
                 .MainTableEvents(events =>
                 {
