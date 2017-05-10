@@ -41,6 +41,7 @@ namespace PdfRpt.HeaderTemplates
 
         /// <summary>
         /// A Possible run direction value, left-to-right or right-to-left.
+        /// If you don't specify the RunDirection, the PdfRunDirection.RightToLeft will be used.
         /// </summary>
         public PdfRunDirection? RunDirection { set; get; }
 

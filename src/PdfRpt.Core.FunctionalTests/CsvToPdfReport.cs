@@ -49,7 +49,7 @@ namespace PdfRpt.Core.FunctionalTests
                  {
                      defaultHeader.RunDirection(PdfRunDirection.LeftToRight);
                      defaultHeader.ImagePath(TestUtils.GetImagePath("01.png"));
-                     defaultHeader.Message("Our new rpt.");
+                     defaultHeader.Message("Our new rpt. 1 2 3 4 5 test 6 7 def");
                  });
              })
              .MainTableTemplate(template =>

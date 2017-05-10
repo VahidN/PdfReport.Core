@@ -66,6 +66,7 @@ namespace PdfRpt.FluentInterface
 
         /// <summary>
         /// A Possible run direction value, left-to-right or right-to-left.
+        /// If you don't specify the RunDirection, the PdfRunDirection.RightToLeft will be used.
         /// </summary>
         public void RunDirection(PdfRunDirection? direction)
         {
