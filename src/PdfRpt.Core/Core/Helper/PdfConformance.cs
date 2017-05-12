@@ -48,7 +48,7 @@ namespace PdfRpt.Core.Helper
             pdfDictionary.Put(PdfName.Info, new PdfString("sRGB IEC61966-2.1"));
             pdfDictionary.Put(PdfName.S, PdfName.GtsPdfa1);
 
-            var profileStream = StreamHelper.GetResourceByName("PdfRpt.Core.Core.Helper.srgb.profile");
+            var profileStream = StreamHelper.GetResourceByName("PdfRpt.Core.core.helper.srgb.profile");
             var pdfICCBased = new PdfIccBased(IccProfile.GetInstance(profileStream));
             pdfICCBased.Remove(PdfName.Alternate);
             pdfDictionary.Put(PdfName.Destoutputprofile, PdfWriter.AddToBody(pdfICCBased).IndirectReference);
