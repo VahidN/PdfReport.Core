@@ -36,7 +36,7 @@ namespace PdfRpt.Core.Helper
         public string AttachmentsBookmarkLabel { set; get; }
 
         /// <summary>
-        /// Input files list to merge.
+        /// Input files list to merge. It can be a list of in-memory/MemoryStream PDF files too.
         /// </summary>
         public IList<Stream> InputFileStreams { set; get; }
 
@@ -46,7 +46,7 @@ namespace PdfRpt.Core.Helper
         public DocumentMetadata DocumentMetadata { set; get; }
 
         /// <summary>
-        /// Merged file's stream.
+        /// Merged file's stream. It can be an in-memory/MemoryStream container too.
         /// </summary>
         public Stream OutputFileStream { set; get; }
 
