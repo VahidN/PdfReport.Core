@@ -35,6 +35,7 @@ Usage
 -----------------
 | Sample                 |
 | -----------------------| 
+| [How to use PdfRpt.Core library in an ASP.NET Core application?](/PdfRpt.Core.SampleWebApp) | 
 | [How to create a report from a generic list?](/src/PdfRpt.Core.FunctionalTests/IListPdfReport.cs) | 
 | [How to add calculated fields to a PDF report?](/src/PdfRpt.Core.FunctionalTests/CalculatedFieldsPdfReport.cs) | 
 | [How to use different data sources and then merge them together as a single report file?](/src/PdfRpt.Core.FunctionalTests/MergePdfFilesPdfReport.cs) | 
@@ -65,5 +66,6 @@ Note:
 -----------------
 To run this project on Linux, you will need to install `libgdiplus` too:
 ```
-sudo apt-get updatesudo apt-get install libgdiplus
+sudo apt-get update
+sudo apt-get install libgdiplus
 ```
