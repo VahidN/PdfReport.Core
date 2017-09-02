@@ -43,6 +43,12 @@ namespace PdfRpt
         public bool OutputAsByteArray { set; get; }
 
         /// <summary>
+        /// Close the document by closing the underlying stream. Its default value is true.
+        /// If you want to access the PDF stream after it has been created, set it to false.
+        /// </summary>
+        public bool CloseStream { set; get; } = true;
+
+        /// <summary>
         /// PDF Document object
         /// </summary>
         public Document PdfDoc { get; private set; }
@@ -83,14 +89,28 @@ namespace PdfRpt
             }
             finally
             {
+                if (!CloseStream)
+                {
+                    // close the document without closing the underlying stream
+                    PdfWriter.CloseStream = false;
+                }
+
                 PdfDoc?.Close();
-                if (PdfWriter != null)
+                if (PdfWriter != null && CloseStream)
                 {
                     PdfWriter.CloseStream = true;
                     PdfWriter.Close();
                     PdfWriter = null;
                 }
-                _stream?.Dispose();
+
+                if (CloseStream)
+                {
+                    _stream?.Dispose();
+                }
+                else
+                {
+                    _pdfRptData.PdfStreamOutput.Position = 0;
+                }
             }
             return data;
         }

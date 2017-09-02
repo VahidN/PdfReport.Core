@@ -35,9 +35,14 @@ namespace PdfRpt.FluentInterface
         /// It can be null. In this case a new FileStream will be used automatically and you need to provide the FileName.
         /// </summary>
         /// <param name="pdfStreamOutput">the PDF file's stream</param>
-        public void AsPdfStream(Stream pdfStreamOutput)
+        /// <param name="closeStream">
+        /// Close the document by closing the underlying stream. Its default value is true.
+        /// If you want to access the PDF stream after it has been created, set it to false.
+        /// </param>
+        public void AsPdfStream(Stream pdfStreamOutput, bool closeStream = true)
         {
             _pdfReport.DataBuilder.SetStreamOutput(pdfStreamOutput);
+            _pdfReport.DataBuilder.CloseStream = closeStream;
         }
 
         /// <summary>

@@ -11,6 +11,16 @@ namespace PdfRpt.Core.SampleWebApp.Reports
     {
         public static byte[] CreateInMemoryPdfReport(string wwwroot)
         {
+            return createReport(wwwroot).GenerateAsByteArray(); // creating an in-memory PDF file
+        }
+
+        public static IPdfReportData CreateStreamingPdfReport(string wwwroot, Stream stream)
+        {
+            return createReport(wwwroot).Generate(data => data.AsPdfStream(stream, closeStream: false));
+        }
+
+        private static PdfReport createReport(string wwwroot)
+        {
             return new PdfReport().DocumentPreferences(doc =>
                 {
                     doc.RunDirection(PdfRunDirection.LeftToRight);
@@ -140,8 +150,7 @@ namespace PdfRpt.Core.SampleWebApp.Reports
                 .Export(export =>
                 {
                     export.ToExcel();
-                })
-                .GenerateAsByteArray(); // creating an in-memory PDF file
+                });
         }
     }
 }

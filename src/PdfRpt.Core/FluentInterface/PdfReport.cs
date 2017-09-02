@@ -88,7 +88,8 @@ namespace PdfRpt.FluentInterface
             var rpt = PdfRptDataBuilder;
             new PdfReportDocument
             {
-                PdfRptData = rpt
+                PdfRptData = rpt,
+                CloseStream = DataBuilder.CloseStream
             }.GeneratePdf();
             return rpt;
         }

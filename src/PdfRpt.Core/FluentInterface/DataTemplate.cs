@@ -62,6 +62,12 @@ namespace PdfRpt.FluentInterface
         ITableTemplate _template;
 
         /// <summary>
+        /// Close the document by closing the underlying stream. Its default value is true.
+        /// If you want to access the PDF stream after it has been created, set it to false.
+        /// </summary>
+        public bool CloseStream { set; get; } = true;
+
+        /// <summary>
         /// If you don't set PdfColumnsDefinitions, list of the main table's columns will be extracted from MainTableDataSource automatically.
         /// Here you can control how cells should be rendered based on their specific data types.
         /// </summary>
@@ -880,11 +886,11 @@ namespace PdfRpt.FluentInterface
             var mainFontPath = string.IsNullOrEmpty(_defaultFont1) ? Path.Combine(root, "fonts", "arial.ttf") : _defaultFont1;
             var defaultFontPath = string.IsNullOrEmpty(_defaultFont2) ? Path.Combine(root, "fonts", "verdana.ttf") : _defaultFont2;
             _pdfFont = new GenericFontProvider(mainFontPath, defaultFontPath)
-                       {
-                           Color = _defaultFontsColor,
-                           Size = _defaultFontsSize,
-                           Style = DocumentFontStyle.Normal
-                       };
+            {
+                Color = _defaultFontsColor,
+                Size = _defaultFontsSize,
+                Style = DocumentFontStyle.Normal
+            };
         }
 
         private void setDefaultTemplate()
