@@ -76,42 +76,36 @@ namespace PdfRpt
         {
             checkNullValues();
 
-            byte[] data;
-            try
+            PdfDoc = new Document(DocumentSettings.GetPageSizeAndColor(_pdfRptData.DocumentPreferences),
+                        _pdfRptData.DocumentPreferences.PagePreferences.Margins.Left,
+                        _pdfRptData.DocumentPreferences.PagePreferences.Margins.Right,
+                        _pdfRptData.DocumentPreferences.PagePreferences.Margins.Top,
+                        _pdfRptData.DocumentPreferences.PagePreferences.Margins.Bottom);
+            var data = createPdf();
+
+            if (!CloseStream)
             {
-                PdfDoc = new Document(DocumentSettings.GetPageSizeAndColor(_pdfRptData.DocumentPreferences),
-                            _pdfRptData.DocumentPreferences.PagePreferences.Margins.Left,
-                            _pdfRptData.DocumentPreferences.PagePreferences.Margins.Right,
-                            _pdfRptData.DocumentPreferences.PagePreferences.Margins.Top,
-                            _pdfRptData.DocumentPreferences.PagePreferences.Margins.Bottom);
-
-                data = createPdf();
+                // close the document without closing the underlying stream
+                PdfWriter.CloseStream = false;
             }
-            finally
+
+            PdfDoc?.Close();
+            if (PdfWriter != null && CloseStream)
             {
-                if (!CloseStream)
-                {
-                    // close the document without closing the underlying stream
-                    PdfWriter.CloseStream = false;
-                }
-
-                PdfDoc?.Close();
-                if (PdfWriter != null && CloseStream)
-                {
-                    PdfWriter.CloseStream = true;
-                    PdfWriter.Close();
-                    PdfWriter = null;
-                }
-
-                if (CloseStream)
-                {
-                    _stream?.Dispose();
-                }
-                else
-                {
-                    _pdfRptData.PdfStreamOutput.Position = 0;
-                }
+                PdfWriter.CloseStream = true;
+                PdfWriter.Close();
+                PdfWriter = null;
             }
+
+            if (CloseStream)
+            {
+                _stream?.Dispose();
+            }
+            else
+            {
+                _pdfRptData.PdfStreamOutput.Position = 0;
+            }
+
             return data;
         }
 
