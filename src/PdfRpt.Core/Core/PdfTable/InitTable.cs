@@ -83,11 +83,21 @@ namespace PdfRpt.Core.PdfTable
             setWidths();
 
             TableCellHelper = new TableCellHelper
-                                      {
-                                          SharedData = SharedData,
-                                          MainTable = MainTable,
-                                          CurrentRowInfoData = CurrentRowInfoData
-                                      };
+            {
+                SharedData = SharedData,
+                MainTable = MainTable,
+                CurrentRowInfoData = CurrentRowInfoData,
+                ShowAllGroupsSummaryRow = showAllGroupsSummaryRow
+            };
+        }
+
+        bool showAllGroupsSummaryRow
+        {
+            get
+            {
+                if (SharedData.PageSetup.GroupsPreferences == null) return true;
+                return SharedData.PageSetup.GroupsPreferences.ShowAllGroupsSummaryRow;
+            }
         }
 
         private void setDefaultSpacingAfterForGroups()

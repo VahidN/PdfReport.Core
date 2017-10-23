@@ -112,17 +112,20 @@ namespace PdfRpt.Core.PdfTable
             setSetTotalWidths(mainTableAbsoluteWidths);
 
             TableCellHelper = new TableCellHelper
-                                  {
-                                      SharedData = SharedData,
-                                      MainTable = MainTable,
-                                      ShowAllGroupsSummaryRow = true,
-                                      CurrentRowInfoData = CurrentRowInfoData
-                                  };
+            {
+                SharedData = SharedData,
+                MainTable = MainTable,
+                ShowAllGroupsSummaryRow = showAllGroupsSummaryRow,
+                CurrentRowInfoData = CurrentRowInfoData
+            };
 
             RowsManager.MainTable = MainTable;
             RowsManager.TableCellHelper = TableCellHelper;
 
-            RowsManager.AddFooterRow(RowType.AllGroupsSummaryRow);
+            if (showAllGroupsSummaryRow)
+            {
+                RowsManager.AddFooterRow(RowType.AllGroupsSummaryRow);
+            }
 
             MainTable.ElementComplete = true; //print footer
             if (SharedData.ShouldWrapTablesInColumns)
@@ -256,6 +259,15 @@ namespace PdfRpt.Core.PdfTable
             {
                 if (SharedData.PageSetup.GroupsPreferences == null) return 0f;
                 return SharedData.PageSetup.GroupsPreferences.SpacingAfterAllGroupsSummary;
+            }
+        }
+
+        bool showAllGroupsSummaryRow
+        {
+            get
+            {
+                if (SharedData.PageSetup.GroupsPreferences == null) return true;
+                return SharedData.PageSetup.GroupsPreferences.ShowAllGroupsSummaryRow;
             }
         }
 

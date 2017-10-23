@@ -22,7 +22,7 @@ namespace PdfRpt.Core.Contracts
         public bool RepeatHeaderRowPerGroup { set; get; }
 
         /// <summary>
-        /// If set to false and GroupType is set to IncludeGroupingColumns, 
+        /// If set to false and GroupType is set to IncludeGroupingColumns,
         /// only first row of the each group will show the grouping properties values.
         /// If GroupType is set to HideGroupingColumns, this property will be ignored.
         /// </summary>
@@ -45,12 +45,19 @@ namespace PdfRpt.Core.Contracts
         public float NewGroupAvailableSpacingThreshold { set; get; }
 
         /// <summary>
+        /// Indicates visibility of the groups SummaryRows
+        /// Its default value is true
+        /// </summary>
+        public bool ShowAllGroupsSummaryRow { set; get; }
+
+        /// <summary>
         /// ctor.
         /// </summary>
         public GroupsPreferences()
         {
             SpacingBeforeAllGroupsSummary = 15f;
             NewGroupAvailableSpacingThreshold = 150f;
+            ShowAllGroupsSummaryRow = true;
         }
     }
 }
