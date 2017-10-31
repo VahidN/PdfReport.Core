@@ -1,5 +1,4 @@
-
-[GNU LIBRARY GENERAL PUBLIC LICENSE (LGPL V2.0)](https://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html)
+GNU LIBRARY GENERAL PUBLIC LICENSE (LGPL V2.0)
 
 Version 2, June 1991
 
