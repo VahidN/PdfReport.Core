@@ -141,7 +141,11 @@ namespace PdfRpt.Core.Helper
                 case TypeCode.UInt64:
                     return true;
                 case TypeCode.Object:
+#if NET40
+                    if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+#else
                     if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+#endif
                     {
                         return IsNumericType(Nullable.GetUnderlyingType(type));
                     }
@@ -159,7 +163,11 @@ namespace PdfRpt.Core.Helper
         public static object GetPropertyValue(this PropertyInfo propertyInfo, object instance)
         {
             var value = propertyInfo.GetValue(instance, null);
+#if NET40
+            if (value != null && propertyInfo.PropertyType.IsEnum)
+#else
             if (value != null && propertyInfo.PropertyType.GetTypeInfo().IsEnum)
+#endif
             {
                 return ((Enum)value).GetEnumStringValue();
             }

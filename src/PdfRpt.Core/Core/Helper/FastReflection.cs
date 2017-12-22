@@ -95,7 +95,11 @@ namespace PdfRpt.Core.Helper
 
         static Func<object, object> createGetterPropertyDelegate(Type type, PropertyInfo propertyInfo, int index)
         {
+#if NET40
+            var getMethod = propertyInfo.GetGetMethod();
+#else
             var getMethod = propertyInfo.GetMethod;
+#endif
             if (getMethod == null)
                 throw new InvalidOperationException(string.Format("Couldn't get the GetMethod of {0}", type));
 

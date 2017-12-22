@@ -25,7 +25,11 @@ namespace PdfRpt.DataAnnotations
             if (aggregateFunctionType == null)
                 throw new ArgumentNullException("aggregateFunctionType");
 
+#if NET40
+            if (!aggregateFunctionType.GetInterfaces().Contains(typeof(IAggregateFunction)))
+#else
             if (!aggregateFunctionType.GetTypeInfo().GetInterfaces().Contains(typeof(IAggregateFunction)))
+#endif
                 throw new ArgumentException("The aggregateFunctionType Type must typeof(IAggregateFunction).", "aggregateFunctionType");
 
             if (aggregateFunctionType.GetConstructor(Type.EmptyTypes) == null)

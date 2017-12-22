@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>PdfReport.Core is a code first reporting engine, which is built on top of the iTextSharp.LGPLv2.Core and EPPlus.Core libraries.</Description>
-    <VersionPrefix>1.1.3</VersionPrefix>
+    <VersionPrefix>1.1.4</VersionPrefix>
     <Authors>Vahid Nasiri</Authors>
-    <TargetFrameworks>netstandard1.6;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net40;netstandard1.6;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>PdfRpt.Core</AssemblyName>
     <PackageId>PdfRpt.Core</PackageId>
@@ -27,7 +27,7 @@
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.3.4" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.0" />
     <PackageReference Include="EPPlus.Core" Version="1.5.3" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
@@ -35,9 +35,18 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.3.4" />
-    <PackageReference Include="EPPlus.Core" Version="1.5.3" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.0" />
+    <PackageReference Include="EPPlus" Version="4.5.0.1-beta" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
+    <Reference Include="System.ComponentModel.DataAnnotations"/>
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.1.3" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.0" />
+    <PackageReference Include="EPPlus" Version="4.5.0.1-beta" />
+  </ItemGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
+    <DefineConstants>NET40</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <PlatformTarget>anycpu</PlatformTarget>
   </PropertyGroup>

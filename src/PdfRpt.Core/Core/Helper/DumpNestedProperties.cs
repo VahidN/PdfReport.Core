@@ -33,33 +33,37 @@ namespace PdfRpt.Core.Helper
                 {
                     var nullDisplayText = propertyGetter.MemberInfo.GetNullDisplayTextAttribute();
                     _result.Add(new CellData
-                                {
-                                    PropertyName = name,
-                                    PropertyValue = nullDisplayText,
-                                    PropertyIndex = _index++,
-                                    PropertyType = propertyGetter.PropertyType
-                                });
+                    {
+                        PropertyName = name,
+                        PropertyValue = nullDisplayText,
+                        PropertyIndex = _index++,
+                        PropertyType = propertyGetter.PropertyType
+                    });
                 }
+#if NET40
+                else if (propertyGetter.PropertyType.IsEnum)
+#else
                 else if (propertyGetter.PropertyType.GetTypeInfo().IsEnum)
+#endif
                 {
                     var enumValue = ((Enum)dataValue).GetEnumStringValue();
                     _result.Add(new CellData
-                                {
-                                    PropertyName = name,
-                                    PropertyValue = enumValue,
-                                    PropertyIndex = _index++,
-                                    PropertyType = propertyGetter.PropertyType
-                                });
+                    {
+                        PropertyName = name,
+                        PropertyValue = enumValue,
+                        PropertyIndex = _index++,
+                        PropertyType = propertyGetter.PropertyType
+                    });
                 }
                 else if (isNestedProperty(propertyGetter.PropertyType))
                 {
                     _result.Add(new CellData
-                                {
-                                    PropertyName = name,
-                                    PropertyValue = dataValue,
-                                    PropertyIndex = _index++,
-                                    PropertyType = propertyGetter.PropertyType
-                                });
+                    {
+                        PropertyName = name,
+                        PropertyValue = dataValue,
+                        PropertyIndex = _index++,
+                        PropertyType = propertyGetter.PropertyType
+                    });
 
                     if (parent.Split('.').Length > dumpLevel)
                     {
@@ -70,12 +74,12 @@ namespace PdfRpt.Core.Helper
                 else
                 {
                     _result.Add(new CellData
-                                {
-                                    PropertyName = name,
-                                    PropertyValue = dataValue,
-                                    PropertyIndex = _index++,
-                                    PropertyType = propertyGetter.PropertyType
-                                });
+                    {
+                        PropertyName = name,
+                        PropertyValue = dataValue,
+                        PropertyIndex = _index++,
+                        PropertyType = propertyGetter.PropertyType
+                    });
                 }
             }
             return _result;
@@ -83,7 +87,11 @@ namespace PdfRpt.Core.Helper
 
         private static bool isNestedProperty(Type type)
         {
+#if NET40
+            var typeInfo = type;
+#else
             var typeInfo = type.GetTypeInfo();
+#endif
             var assemblyFullName = typeInfo.Assembly.FullName;
             if (assemblyFullName.StartsWith("mscorlib", StringComparison.OrdinalIgnoreCase) ||
                 assemblyFullName.StartsWith("System.Private.CoreLib", StringComparison.OrdinalIgnoreCase))

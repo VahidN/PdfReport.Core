@@ -213,7 +213,11 @@ namespace PdfRpt.Core.Helper
 
         private void addMetadata()
         {
+#if NET40
+            var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+#else
             var version = typeof(DocumentSettings).GetTypeInfo().Assembly.GetName().Version.ToString();
+#endif
 
             if (DocumentProperties != null)
             {

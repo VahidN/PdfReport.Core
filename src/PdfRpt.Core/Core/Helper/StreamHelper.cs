@@ -17,7 +17,11 @@ namespace PdfRpt.Core.Helper
         /// <returns>embedded resource</returns>
         public static byte[] GetResourceByName(string fileName)
         {
+#if NET40
+            var assembly = Assembly.GetExecutingAssembly();
+#else
             var assembly = typeof(StreamHelper).GetTypeInfo().Assembly;
+#endif
             var stream = assembly.GetManifestResourceStream(fileName);
 
             if (stream == null)

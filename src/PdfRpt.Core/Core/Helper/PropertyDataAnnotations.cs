@@ -148,7 +148,11 @@ namespace PdfRpt.Core.Helper
         public static bool IsStronglyTypedListDataSource(this IDataSource bodyDataSource)
         {
             var baseType = bodyDataSource.GetType();
+#if NET40
+            if (!baseType.IsGenericType) return false;
+#else
             if (!baseType.GetTypeInfo().IsGenericType) return false;
+#endif
             return baseType.GetGenericTypeDefinition() == typeof(StronglyTypedListDataSource<>);
         }
 

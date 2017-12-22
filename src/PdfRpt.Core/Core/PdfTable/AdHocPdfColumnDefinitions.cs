@@ -68,7 +68,11 @@ namespace PdfRpt.Core.PdfTable
                 if (cellData.PropertyValue != null)
                     type = cellData.PropertyValue.GetType();
 
+#if NET40
+                if (type != null && type.BaseType == typeof(MulticastDelegate))
+#else
                 if (type != null && type.GetTypeInfo().BaseType == typeof(MulticastDelegate))
+#endif
                     continue;
 
                 var itemsTemplate = getColumnItemsTemplate(cellData.PropertyName, type);
@@ -108,19 +112,19 @@ namespace PdfRpt.Core.PdfTable
         private static ColumnAttributes getRowNoCol()
         {
             return new ColumnAttributes
-                         {
-                             HeaderCell = new HeadingCell
-                             {
-                                 Caption = "No."
-                             },
-                             ColumnItemsTemplate = new TextBlockField(),
-                             Width = 1,
-                             PropertyName = "_Row_No.",
-                             IsVisible = true,
-                             CellsHorizontalAlignment = HorizontalAlignment.Center,
-                             Order = 1,
-                             IsRowNumber = true
-                         };
+            {
+                HeaderCell = new HeadingCell
+                {
+                    Caption = "No."
+                },
+                ColumnItemsTemplate = new TextBlockField(),
+                Width = 1,
+                PropertyName = "_Row_No.",
+                IsVisible = true,
+                CellsHorizontalAlignment = HorizontalAlignment.Center,
+                Order = 1,
+                IsRowNumber = true
+            };
         }
 
         private void setAggregateFunc(string columnName, ColumnAttributes colDef, Type type)
