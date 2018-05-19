@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using PdfRpt.Core.Contracts;
+using PdfRpt.Core.Core.Helper;
 
 namespace PdfRpt.ColumnsItemsTemplates
 {
@@ -16,7 +17,7 @@ namespace PdfRpt.ColumnsItemsTemplates
         /// </summary>
         public string WingdingsFontPath
         {
-            get { return System.IO.Path.Combine(Environment.GetEnvironmentVariable("SystemRoot"), "fonts", "WINGDING.TTF"); }
+            get { return System.IO.Path.Combine(FontsDirPath.SystemFontsFolder, "WINGDING.TTF"); }
         }
 
         /// <summary>

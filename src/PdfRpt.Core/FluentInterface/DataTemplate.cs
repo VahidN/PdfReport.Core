@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using iTextSharp.text;
 using PdfRpt.Core.Contracts;
+using PdfRpt.Core.Core.Helper;
 using PdfRpt.Core.Helper;
 using PdfRpt.FooterTemplates;
 
@@ -882,9 +883,9 @@ namespace PdfRpt.FluentInterface
 
         void setDefaultPdfFonts()
         {
-            var root = Environment.GetEnvironmentVariable("SystemRoot");
-            var mainFontPath = string.IsNullOrEmpty(_defaultFont1) ? Path.Combine(root, "fonts", "arial.ttf") : _defaultFont1;
-            var defaultFontPath = string.IsNullOrEmpty(_defaultFont2) ? Path.Combine(root, "fonts", "verdana.ttf") : _defaultFont2;
+            var fontsPath = FontsDirPath.SystemFontsFolder;
+            var mainFontPath = string.IsNullOrEmpty(_defaultFont1) ? Path.Combine(fontsPath, "arial.ttf") : _defaultFont1;
+            var defaultFontPath = string.IsNullOrEmpty(_defaultFont2) ? Path.Combine(fontsPath, "verdana.ttf") : _defaultFont2;
             _pdfFont = new GenericFontProvider(mainFontPath, defaultFontPath)
             {
                 Color = _defaultFontsColor,

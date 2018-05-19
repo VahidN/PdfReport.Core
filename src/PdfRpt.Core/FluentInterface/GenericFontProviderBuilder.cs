@@ -1,6 +1,7 @@
 ﻿using System;
 using iTextSharp.text;
 using PdfRpt.Core.Contracts;
+using PdfRpt.Core.Core.Helper;
 
 namespace PdfRpt.FluentInterface
 {
@@ -12,8 +13,8 @@ namespace PdfRpt.FluentInterface
         private BaseColor _color = new BaseColor(System.Drawing.Color.Black.ToArgb());
         private int _size = 9;
         private DocumentFontStyle _fontStyle = DocumentFontStyle.Normal;
-        private string _font1 = System.IO.Path.Combine(Environment.GetEnvironmentVariable("SystemRoot") , "fonts", "tahoma.ttf");
-        private string _font2 = System.IO.Path.Combine(Environment.GetEnvironmentVariable("SystemRoot") , "fonts", "tahoma.ttf");
+        private string _font1 = System.IO.Path.Combine(FontsDirPath.SystemFontsFolder, "tahoma.ttf");
+        private string _font2 = System.IO.Path.Combine(FontsDirPath.SystemFontsFolder, "arial.ttf");
 
         internal GenericFontProvider GenericFontProvider
         {
