@@ -55,5 +55,11 @@ namespace PdfRpt.Core.Contracts
         /// Here you can assign an AggregateFunction to the specific column name.
         /// </summary>
         public IDictionary<string, IAggregateFunction> ColumnNamesAggregateFunctions { set; get; }
+
+        /// <summary>
+        /// List of column names that you want to show when you are using StronglyTypedList as MainTableDataSource.
+        /// Leave it empty to show all columns.
+        /// </summary>
+        public IList<string> VisibleColumnNames { set; get; }
     }
 }

@@ -17,8 +17,9 @@ namespace PdfRpt.Core.Helper
         /// </summary>
         /// <param name="bodyDataSource">Data source</param>        
         /// <param name="result">A list of PdfColumnAttributes</param>
+        /// <param name="visibleColumnsName">A list of visible column name</param>
         /// <param name="areColumnsAdHoc">It's possible to remove the MainTableColumns part completely</param>
-        public static void ApplyPropertyDataAnnotations(this IDataSource bodyDataSource, IList<ColumnAttributes> result, bool areColumnsAdHoc = false)
+        public static void ApplyPropertyDataAnnotations(this IDataSource bodyDataSource, IList<ColumnAttributes> result, IList<string> visibleColumnsName, bool areColumnsAdHoc = false)
         {
             var properties = bodyDataSource.GetPropertiesInfoOfStronglyTypedListDataSource();
             if (properties == null || !properties.Any()) return;
@@ -35,7 +36,7 @@ namespace PdfRpt.Core.Helper
                 applyFixedHeight(property, columnAttributes);
                 applyMinimumHeight(property, columnAttributes);
                 applyCellsHorizontalAlignment(property, columnAttributes);
-                applyColumnIsVisible(property, columnAttributes);
+                applyColumnIsVisible(property, columnAttributes, visibleColumnsName);
                 applyOrder(property, columnAttributes);
                 applyWidth(property, columnAttributes);
                 applyDataFormatString(property, columnAttributes);
@@ -107,11 +108,16 @@ namespace PdfRpt.Core.Helper
                 columnAttributes.Order = order.Value;
         }
 
-        private static void applyColumnIsVisible(PropertyInfo property, ColumnAttributes columnAttributes)
+        private static void applyColumnIsVisible(PropertyInfo property, ColumnAttributes columnAttributes, IList<string> visibleColumnsName)
         {
             var isVisible = property.GetColumnIsVisibleAttribute();
             if (isVisible.HasValue)
                 columnAttributes.IsVisible = isVisible.Value;
+            
+            if (!isVisible.HasValue && visibleColumnsName != null)
+            {
+                columnAttributes.IsVisible = visibleColumnsName.Any(x => x.Equals(property.Name, StringComparison.OrdinalIgnoreCase));
+            }
         }
 
         private static void applyCellsHorizontalAlignment(PropertyInfo property, ColumnAttributes columnAttributes)

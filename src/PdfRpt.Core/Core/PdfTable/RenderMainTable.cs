@@ -184,7 +184,8 @@ namespace PdfRpt.Core.PdfTable
                 areColumnsAdHoc = true;
                 _originalPdfColumnsDefinitions = new AdHocPdfColumnDefinitions(_bodyDataSource, _conventions).CreatePdfColumnDefinitions();
             }
-            _bodyDataSource.ApplyPropertyDataAnnotations(this._originalPdfColumnsDefinitions, areColumnsAdHoc);
+            var visibleColumns = PdfRptData.AdHocColumnsConventions.VisibleColumnNames;
+            _bodyDataSource.ApplyPropertyDataAnnotations(this._originalPdfColumnsDefinitions, visibleColumns, areColumnsAdHoc);
 
             if (_pageSetup.GroupsPreferences == null ||
                 _pageSetup.GroupsPreferences.GroupType == GroupType.HideGroupingColumns)
