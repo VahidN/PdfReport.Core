@@ -107,5 +107,14 @@ namespace PdfRpt.FluentInterface
 
             _builder.ColumnNamesAggregateFunctions.Add(name, func);
         }
+
+        /// <summary>
+        /// List of column names that you want to show when you are using StronglyTypedList as MainTableDataSource.
+        /// Leave it empty to show all columns.
+        /// </summary>
+        public void VisibleColumnNames(IList<string> visibleColumnNames)
+        {
+            _builder.VisibleColumnNames = visibleColumnNames;
+        }
     }
 }
