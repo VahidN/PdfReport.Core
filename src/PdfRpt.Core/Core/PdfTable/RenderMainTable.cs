@@ -96,24 +96,24 @@ namespace PdfRpt.Core.PdfTable
         private void initManagers()
         {
             _groupsManager = new GroupsManager
-                                 {
-                                     SharedData = _commonManagersInfoData,
-                                     InitTable = _initTable,
-                                     MainTable = _mainTable,
-                                     CurrentRowInfoData = CurrentRowInfoData,
-                                     TableCellHelper = _tableCellHelper,
-                                     MainGroupTable = _mainGroupTable
-                                 };
+            {
+                SharedData = _commonManagersInfoData,
+                InitTable = _initTable,
+                MainTable = _mainTable,
+                CurrentRowInfoData = CurrentRowInfoData,
+                TableCellHelper = _tableCellHelper,
+                MainGroupTable = _mainGroupTable
+            };
 
             _rowsManager = new RowsManager
-                               {
-                                   SharedData = _commonManagersInfoData,
-                                   TableCellHelper = _tableCellHelper,
-                                   MainTable = _mainTable,
-                                   GroupsManager = _groupsManager,
-                                   MainGroupTable = _mainGroupTable,
-                                   CurrentRowInfoData = CurrentRowInfoData
-                               };
+            {
+                SharedData = _commonManagersInfoData,
+                TableCellHelper = _tableCellHelper,
+                MainTable = _mainTable,
+                GroupsManager = _groupsManager,
+                MainGroupTable = _mainGroupTable,
+                CurrentRowInfoData = CurrentRowInfoData
+            };
 
             _groupsManager.RowsManager = _rowsManager;
         }
@@ -121,10 +121,10 @@ namespace PdfRpt.Core.PdfTable
         private void initTable()
         {
             _initTable = new InitTable
-                             {
-                                 SharedData = _commonManagersInfoData,
-                                 CurrentRowInfoData = CurrentRowInfoData
-                             };
+            {
+                SharedData = _commonManagersInfoData,
+                CurrentRowInfoData = CurrentRowInfoData
+            };
             _initTable.CreateMainTable();
             _mainTable = _initTable.MainTable;
             _tableCellHelper = _initTable.TableCellHelper;
@@ -184,7 +184,7 @@ namespace PdfRpt.Core.PdfTable
                 areColumnsAdHoc = true;
                 _originalPdfColumnsDefinitions = new AdHocPdfColumnDefinitions(_bodyDataSource, _conventions).CreatePdfColumnDefinitions();
             }
-            var visibleColumns = PdfRptData.AdHocColumnsConventions.VisibleColumnNames;
+            var visibleColumns = _conventions?.VisibleColumnNames;
             _bodyDataSource.ApplyPropertyDataAnnotations(this._originalPdfColumnsDefinitions, visibleColumns, areColumnsAdHoc);
 
             if (_pageSetup.GroupsPreferences == null ||
