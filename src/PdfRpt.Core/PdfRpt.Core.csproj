@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>PdfReport.Core is a code first reporting engine, which is built on top of the iTextSharp.LGPLv2.Core and EPPlus.Core libraries.</Description>
-    <VersionPrefix>1.2.1</VersionPrefix>
+    <VersionPrefix>1.2.2</VersionPrefix>
     <Authors>Vahid Nasiri</Authors>
     <TargetFrameworks>net40;netstandard1.6;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -27,8 +27,8 @@
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.3" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.4" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.5" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
@@ -38,14 +38,14 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.3" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.4" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.5" />
     <PackageReference Include="EPPlus" Version="4.5.2.1" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
-    <Reference Include="System.ComponentModel.DataAnnotations"/>
-    <PackageReference Include="Portable.BouncyCastle" Version="1.8.3" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.4" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.8.4" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.5" />
     <PackageReference Include="EPPlus" Version="4.5.2.1" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">
