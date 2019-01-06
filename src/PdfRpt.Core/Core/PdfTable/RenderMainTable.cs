@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
@@ -222,6 +223,11 @@ namespace PdfRpt.Core.PdfTable
 
         private void setLocalCache()
         {
+            if (PdfRptData.MainTableDataSource == null)
+            {
+                throw new InvalidOperationException("MainTableDataSource is null or empty.");
+            }
+
             _bodyDataSource = PdfRptData.MainTableDataSource();
             _rptTemplate = PdfRptData.Template ?? new BasicTemplateProvider(BasicTemplate.NullTemplate);
             _pdfRptSummarySettings = PdfRptData.SummarySettings;
