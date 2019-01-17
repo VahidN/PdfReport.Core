@@ -50,6 +50,11 @@ namespace PdfRpt.FluentInterface
         /// </summary>
         public void DisplayFormatFormula(Func<object, string> formula)
         {
+            if (_columnItemsTemplate == null)
+            {
+                throw new InvalidOperationException("`ColumnItemsTemplate` is null. You should configure how to display this cell's data, such as `template.TextBlock();`.");
+            }
+
             if (_columnItemsTemplate.BasicProperties == null)
                 _columnItemsTemplate.BasicProperties = new CellBasicProperties();
 
