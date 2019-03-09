@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>PdfReport.Core is a code first reporting engine, which is built on top of the iTextSharp.LGPLv2.Core and EPPlus.Core libraries.</Description>
-    <VersionPrefix>1.2.6</VersionPrefix>
+    <VersionPrefix>1.2.7</VersionPrefix>
     <Authors>Vahid Nasiri</Authors>
     <TargetFrameworks>net40;netstandard1.6;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -28,7 +28,7 @@
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.6" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.5.0" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard1.6'">
@@ -39,13 +39,13 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.6" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.5.0" />
     <PackageReference Include="EPPlus" Version="4.5.3.1" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.5" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.4.6" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.5.0" />
     <PackageReference Include="EPPlus" Version="4.5.3.1" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net40'">

@@ -289,7 +289,7 @@ namespace PdfRpt.Core.PdfTable
             var horizontalAlignment = SharedData.SummarySettings.OverallSummarySettings.LabelHorizontalAlignment;
             var text = SharedData.SummarySettings.OverallSummarySettings.Label;
 
-            if (ShowAllGroupsSummaryRow)
+            if (ShowAllGroupsSummaryRow && pdfRowType == RowType.AllGroupsSummaryRow)
             {
                 horizontalAlignment = SharedData.SummarySettings.AllGroupsSummarySettings.LabelHorizontalAlignment;
                 text = SharedData.SummarySettings.AllGroupsSummarySettings.Label;

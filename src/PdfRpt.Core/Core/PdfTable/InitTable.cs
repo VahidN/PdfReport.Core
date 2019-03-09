@@ -95,7 +95,7 @@ namespace PdfRpt.Core.PdfTable
         {
             get
             {
-                if (SharedData.PageSetup.GroupsPreferences == null) return true;
+                if (SharedData.PageSetup.GroupsPreferences == null) return false;
                 return SharedData.PageSetup.GroupsPreferences.ShowAllGroupsSummaryRow;
             }
         }
