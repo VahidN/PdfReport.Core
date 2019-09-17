@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using iTextSharp.text;
@@ -14,8 +15,10 @@ namespace PdfRpt.Core.Helper
     {
         // This way, the image bytes will be added to the PDF only once, not per each new instance.
         // Therefore the result won't be a bloated PDF file.
-        static readonly IDictionary<string, iTextSharp.text.Image> _imageFilesCache = new Dictionary<string, iTextSharp.text.Image>();
-        static readonly IDictionary<string, iTextSharp.text.Image> _imageBytesCache = new Dictionary<string, iTextSharp.text.Image>();
+        private static readonly ConcurrentDictionary<string, iTextSharp.text.Image> _imageFilesCache =
+              new ConcurrentDictionary<string, iTextSharp.text.Image>();
+        private static readonly ConcurrentDictionary<string, iTextSharp.text.Image> _imageBytesCache =
+              new ConcurrentDictionary<string, iTextSharp.text.Image>();
 
         private static iTextSharp.text.Image checkImage(this iTextSharp.text.Image img)
         {
@@ -64,7 +67,7 @@ namespace PdfRpt.Core.Helper
                 return image.checkImage();
 
             image = iTextSharp.text.Image.GetInstance(imageFilePath);
-            _imageFilesCache.Add(pathHash, image);
+            _imageFilesCache.TryAdd(pathHash, image);
             return image.checkImage();
         }
 
@@ -85,7 +88,7 @@ namespace PdfRpt.Core.Helper
                 return image.checkImage();
 
             image = iTextSharp.text.Image.GetInstance(data);
-            _imageBytesCache.Add(pathHash, image);
+            _imageBytesCache.TryAdd(pathHash, image);
             return image.checkImage();
         }
 

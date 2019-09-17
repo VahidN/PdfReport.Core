@@ -15,11 +15,11 @@ namespace PdfRpt.Core.FunctionalTests
         [TestMethod]
         public void Verify_HtmlCellTemplatePdfReport_Can_Be_Created()
         {
-            var report = CreateHtmlCellTemplatePdfReport();
+            var report = CreateHtmlCellTemplatePdfReport().Generate(data => data.AsPdfFile(TestUtils.GetOutputFileName()));
             TestUtils.VerifyPdfFileIsReadable(report.FileName);
         }
 
-        public IPdfReportData CreateHtmlCellTemplatePdfReport()
+        public PdfReport CreateHtmlCellTemplatePdfReport()
         {
             return new PdfReport().DocumentPreferences(doc =>
             {
@@ -76,7 +76,7 @@ namespace PdfRpt.Core.FunctionalTests
                  var rnd = new Random();
                  for (int i = 0; i < 100; i++)
                  {
-                     var photo = System.IO.Path.Combine(TestUtils.GetBaseDir(), "Images" , rnd.Next(1, 5).ToString("00") + ".png");
+                     var photo = System.IO.Path.Combine(TestUtils.GetBaseDir(), "Images", rnd.Next(1, 5).ToString("00") + ".png");
 
                      dynamic user = new ExpandoObject();
                      user.User = "User " + i;
@@ -205,8 +205,7 @@ namespace PdfRpt.Core.FunctionalTests
              {
                  export.ToXml();
                  export.ToExcel();
-             })
-             .Generate(data => data.AsPdfFile(TestUtils.GetOutputFileName()));
+             });
         }
     }
 }

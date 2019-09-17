@@ -1,7 +1,11 @@
 PdfReport.Core
 =======
 
-[![Build status](https://ci.appveyor.com/api/projects/status/15tcr7ti0slg1x6l?svg=true)](https://ci.appveyor.com/project/VahidN/pdfreport-core)
+<p align="left">
+  <a href="https://github.com/VahidN/PdfReport.Core">
+     <img alt="GitHub Actions status" src="https://github.com/VahidN/PdfReport.Core/workflows/.NET%20Core%20Build/badge.svg">
+  </a>
+</p>
 
 
 PdfReport.Core is a code first reporting engine, which is built on top of the [iTextSharp.LGPLv2.Core](https://github.com/VahidN/iTextSharp.LGPLv2.Core) and [EPPlus.Core](https://github.com/VahidN/EPPlus.Core) libraries.

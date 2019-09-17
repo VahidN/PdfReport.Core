@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using PdfRpt.Core.Contracts;
@@ -11,10 +12,11 @@ namespace PdfRpt
     /// </summary>
     public class GenericFontProvider : IPdfFont
     {
-        readonly string _mainFontPath;
-        readonly string _defaultFontPath;
-        readonly Font _mainFont;
-        readonly Font _defaultFont;
+        private readonly string _mainFontPath;
+        private readonly string _defaultFontPath;
+        private readonly Font _mainFont;
+        private readonly Font _defaultFont;
+        private static readonly Object _syncLock = new Object();
 
         /// <summary>
         /// Sets registered font's name.
@@ -78,14 +80,17 @@ namespace PdfRpt
 
         private static void registerFonts(string mainFontPath, string defaultFontPath)
         {
-            if (!FontFactory.IsRegistered(mainFontPath))
+            lock (_syncLock)
             {
-                FontFactory.Register(mainFontPath);
-            }
+                if (!FontFactory.IsRegistered(mainFontPath))
+                {
+                    FontFactory.Register(mainFontPath);
+                }
 
-            if (!FontFactory.IsRegistered(defaultFontPath))
-            {
-                FontFactory.Register(defaultFontPath);
+                if (!FontFactory.IsRegistered(defaultFontPath))
+                {
+                    FontFactory.Register(defaultFontPath);
+                }
             }
         }
 
@@ -121,20 +126,23 @@ namespace PdfRpt
 
         private IList<Font> getFonts()
         {
-            if (!string.IsNullOrEmpty(_mainFontPath) && !string.IsNullOrEmpty(_defaultFontPath))
+            lock (_syncLock)
             {
-                return new List<Font>
+                if (!string.IsNullOrEmpty(_mainFontPath) && !string.IsNullOrEmpty(_defaultFontPath))
+                {
+                    return new List<Font>
                 {
                      FontFactory.GetFont(_mainFontPath, BaseFont.IDENTITY_H, true, Size, (int)Style, Color),
                      FontFactory.GetFont(_defaultFontPath, BaseFont.IDENTITY_H, true, Size, (int)Style, Color)
                 };
-            }
+                }
 
-            return new List<Font>
-            {
-                FontFactory.GetFont(_mainFont.Familyname, BaseFont.IDENTITY_H, true, Size, (int)Style, Color),
-                FontFactory.GetFont(_defaultFont.Familyname, BaseFont.IDENTITY_H, true, Size, (int)Style, Color)
-            };
+                return new List<Font>
+                {
+                    FontFactory.GetFont(_mainFont.Familyname, BaseFont.IDENTITY_H, true, Size, (int)Style, Color),
+                    FontFactory.GetFont(_defaultFont.Familyname, BaseFont.IDENTITY_H, true, Size, (int)Style, Color)
+                };
+            }
         }
 
         /// <summary>

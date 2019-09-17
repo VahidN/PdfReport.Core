@@ -1,4 +1,5 @@
-﻿using iTextSharp.text;
+﻿using System;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 namespace PdfRpt.Core.Helper.HtmlToPdf
@@ -9,6 +10,8 @@ namespace PdfRpt.Core.Helper.HtmlToPdf
     public class UnicodeFontProvider : FontFactoryImp
     {
         private readonly Font _defaultFont;
+        private static readonly Object _syncLock = new Object();
+
         /// <summary>
         /// XmlWorker's Unicode Font Provider class.
         /// </summary>
@@ -24,8 +27,14 @@ namespace PdfRpt.Core.Helper.HtmlToPdf
         public override Font GetFont(string fontname, string encoding, bool embedded, float size, int style, BaseColor color, bool cached)
         {
             if (string.IsNullOrEmpty(fontname))
+            {
                 return _defaultFont;
-            return FontFactory.GetFont(fontname, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, size, style, color);
+            }
+
+            lock (_syncLock)
+            {
+                return FontFactory.GetFont(fontname, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, size, style, color);
+            }
         }
     }
 }
