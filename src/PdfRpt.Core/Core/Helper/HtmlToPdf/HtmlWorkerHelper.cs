@@ -63,10 +63,14 @@ namespace PdfRpt.Core.Helper.HtmlToPdf
 
             applyStyleSheet();
 
+            var unicodeFontProvider = FontFactoryImp.Instance;
+            unicodeFontProvider.DefaultEmbedding = BaseFont.EMBEDDED;
+            unicodeFontProvider.DefaultEncoding = BaseFont.IDENTITY_H;
+
             var props = new Hashtable
             {
                 { "img_provider", new HtmlImageFactory(this.PdfElement) },
-                { "font_factory", new UnicodeFontProvider(PdfFont.Fonts[0]) } // Always use Unicode fonts
+                { "font_factory", unicodeFontProvider } // Always use Unicode fonts
             };
 
             using (var reader = new StringReader(Html))
