@@ -13,9 +13,9 @@ namespace PdfRpt.DataSources
     /// </summary>
     public class CrosstabDataSource : IDataSource
     {
-        readonly IEnumerable _source;
-        readonly bool _topFieldsAreVariableInEachRow;
-        readonly IList<string> _topFields = new List<string>();
+        private readonly IEnumerable _source;
+        private readonly bool _topFieldsAreVariableInEachRow;
+        private readonly IList<string> _topFields = new List<string>();
         private int _index;
         private readonly int _dumpLevel;
 
@@ -165,7 +165,8 @@ namespace PdfRpt.DataSources
                 {
                     PropertyName = key.ToString(),
                     PropertyValue = value,
-                    PropertyIndex = _index++
+                    PropertyIndex = _index++,
+                    PropertyType = value?.GetType()
                 });
 
                 if (_topFieldsAreVariableInEachRow)

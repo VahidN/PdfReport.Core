@@ -65,7 +65,8 @@ namespace PdfRpt.Core.FunctionalTests.CustomDataSources
                                 {
                                     PropertyName = sqlReader.GetName(i),
                                     PropertyValue = value == DBNull.Value ? null : value,
-                                    PropertyIndex = i
+                                    PropertyIndex = i,
+                                    PropertyType = sqlReader.GetFieldType(i)
                                 };
                                 result.Add(pdfCellData);
                             }

@@ -64,9 +64,7 @@ namespace PdfRpt.Core.PdfTable
             var order = 2;
             foreach (var cellData in firstRowCells)
             {
-                Type type = null;
-                if (cellData.PropertyValue != null)
-                    type = cellData.PropertyValue.GetType();
+                var type = cellData.PropertyType;
 
 #if NET40
                 if (type != null && type.BaseType == typeof(MulticastDelegate))

@@ -37,11 +37,13 @@ namespace PdfRpt.DataSources
                 var index = 0;
                 foreach (var field in _fields)
                 {
+                    var value = row[field];
                     var pdfCellData = new CellData
                     {
                         PropertyName = field,
-                        PropertyValue = row[field],
-                        PropertyIndex = index++
+                        PropertyValue = value,
+                        PropertyIndex = index++,
+                        PropertyType = value?.GetType()
                     };
                     list.Add(pdfCellData);
                 }

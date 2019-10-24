@@ -12,8 +12,8 @@ namespace PdfRpt.DataSources
     {
         #region Fields (2)
 
-        const string Pattern = @"(?<Parameter>@\w*)";
-        static readonly Regex RegEx = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private const string Pattern = @"(?<Parameter>@\w*)";
+        private static readonly Regex RegEx = new Regex(Pattern, RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         #endregion Fields
 

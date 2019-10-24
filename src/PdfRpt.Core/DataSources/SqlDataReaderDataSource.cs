@@ -12,9 +12,9 @@ namespace PdfRpt.DataSources
     {
         #region Fields (3)
 
-        readonly string _connectionString;
-        readonly object[] _paramValues;
-        readonly string _sql;
+        private readonly string _connectionString;
+        private readonly object[] _paramValues;
+        private readonly string _sql;
 
         #endregion Fields
 
@@ -64,7 +64,8 @@ namespace PdfRpt.DataSources
                                 {
                                     PropertyName = sqlReader.GetName(i),
                                     PropertyValue = value == DBNull.Value ? null : value,
-                                    PropertyIndex = i
+                                    PropertyIndex = i,
+                                    PropertyType = sqlReader.GetFieldType(i)
                                 };
                                 result.Add(pdfCellData);
                             }

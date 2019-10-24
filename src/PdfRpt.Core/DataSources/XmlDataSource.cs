@@ -14,9 +14,9 @@ namespace PdfRpt.DataSources
     {
         #region Fields (4)
 
-        readonly string _descendantsXPath;
-        readonly string _xml;
-        readonly IList<string> _xPathList;
+        private readonly string _descendantsXPath;
+        private readonly string _xml;
+        private readonly IList<string> _xPathList;
         private int _index;
 
         #endregion Fields
@@ -62,15 +62,13 @@ namespace PdfRpt.DataSources
 
                         var dataEval = (IEnumerable<object>)el.XPathEvaluate(item);
                         var data = dataEval.FirstOrDefault();
-                        var attribute = data as XAttribute;
-                        if (attribute != null)
+                        if (data is XAttribute attribute)
                         {
                             value = attribute.Value;
                         }
                         else
                         {
-                            var element = data as XElement;
-                            if (element != null)
+                            if (data is XElement element)
                             {
                                 value = element.Value;
                             }
@@ -80,7 +78,8 @@ namespace PdfRpt.DataSources
                         {
                             PropertyName = item,
                             PropertyValue = value,
-                            PropertyIndex = _index++
+                            PropertyIndex = _index++,
+                            PropertyType = value?.GetType()
                         });
                     }
                     yield return pdfCellData;

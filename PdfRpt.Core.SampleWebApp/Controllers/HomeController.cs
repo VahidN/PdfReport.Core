@@ -22,7 +22,7 @@ namespace PdfRpt.Core.SampleWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return await RunAsync(() =>
+            return await RunThrottledAsync(() =>
             {
                 var reportBytes = InMemoryPdfReport.CreateInMemoryPdfReport(_hostingEnvironment.WebRootPath);
                 return File(reportBytes, "application/pdf", "report.pdf");
@@ -34,7 +34,7 @@ namespace PdfRpt.Core.SampleWebApp.Controllers
         /// </summary>
         public async Task<IActionResult> Streaming()
         {
-            return await RunAsync(() =>
+            return await RunThrottledAsync(() =>
             {
                 var outputStream = new MemoryStream();
                 InMemoryPdfReport.CreateStreamingPdfReport(_hostingEnvironment.WebRootPath, outputStream);
@@ -45,7 +45,7 @@ namespace PdfRpt.Core.SampleWebApp.Controllers
             });
         }
 
-        public async Task<T> RunAsync<T>(Func<T> action)
+        public async Task<T> RunThrottledAsync<T>(Func<T> action)
         {
             await _semaphoreSlim.WaitAsync();
             try

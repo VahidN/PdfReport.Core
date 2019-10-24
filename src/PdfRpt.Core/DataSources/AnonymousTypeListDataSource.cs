@@ -7,12 +7,12 @@ namespace PdfRpt.DataSources
 {
     /// <summary>
     /// A list DataSource
-    /// </summary>    
+    /// </summary>
     public class AnonymousTypeListDataSource : IDataSource
     {
         #region Fields
 
-        readonly IEnumerable _listOfRows;
+        private readonly IEnumerable _listOfRows;
         private readonly int _dumpLevel;
 
         #endregion Fields
@@ -23,7 +23,7 @@ namespace PdfRpt.DataSources
         /// Converts a list of anonymous type items to an IEnumerable of Pdf Cells Data.
         /// </summary>
         /// <param name="listOfRows">list of items</param>
-        /// <param name="dumpLevel">how many levels should be searched</param> 
+        /// <param name="dumpLevel">how many levels should be searched</param>
         public AnonymousTypeListDataSource(IEnumerable listOfRows, int dumpLevel = 2)
         {
             _listOfRows = listOfRows;

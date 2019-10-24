@@ -21,11 +21,11 @@ namespace PdfRpt.DataSources
 
         /// <summary>
         /// Converts a list of strongly typed items to an IEnumerable of Pdf Cells Data.
-        /// It's useful for working with different ORM's, because final results of all them could be 
+        /// It's useful for working with different ORM's, because final results of all them could be
         /// a strongly typed list of data.
         /// </summary>
         /// <param name="listOfRows">list of items</param>
-        /// <param name="dumpLevel">how many levels should be searched</param> 
+        /// <param name="dumpLevel">how many levels should be searched</param>
         public StronglyTypedListDataSource(IEnumerable<T> listOfRows, int dumpLevel = 2)
         {
             _listOfRows = listOfRows;
