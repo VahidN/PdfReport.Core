@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using PdfRpt.Core.Contracts;
 using PdfRpt.DataAnnotations;
 using PdfRpt.DataSources;
@@ -84,14 +85,29 @@ namespace PdfRpt.Core.Helper
         /// <returns>PropertyName</returns>
         public static string GetColumnPropertyNameAttribute(this MemberInfo info)
         {
-            var columnPropertyName = info.GetCustomAttributes(true).OfType<PropertyNameAttribute>().FirstOrDefault();
-            if (columnPropertyName != null) return columnPropertyName.PropertyName;
+            var columnPropertyName = info?.GetCustomAttributes(true).OfType<PropertyNameAttribute>().FirstOrDefault();
+            if (columnPropertyName != null)
+            {
+                return columnPropertyName.PropertyName;
+            }
 
-            var displayName = info.GetCustomAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
-            if (displayName != null) return displayName.DisplayName;
+            var displayName = info?.GetCustomAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
+            if (displayName != null)
+            {
+                return displayName.DisplayName;
+            }
 
-            var description = info.GetCustomAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
-            if (description != null) return description.Description;
+            var description = info?.GetCustomAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
+            if (description != null)
+            {
+                return description.Description;
+            }
+
+            var display = info?.GetCustomAttributes(true).OfType<DisplayAttribute>().FirstOrDefault();
+            if (display != null)
+            {
+                return display.Name;
+            }
 
             return null;
         }
@@ -101,19 +117,69 @@ namespace PdfRpt.Core.Helper
         /// Processing order is checking DisplayNameAttribute first and then DescriptionAttribute.
         /// If none of these is available, value.ToString() will be returned.
         /// </summary>
-        /// <param name="value">enum value</param>
+        /// <param name="flags">enum value</param>
         /// <returns>string attribute of Enum's value</returns>
-        public static string GetEnumStringValue(this Enum value)
+        public static string GetEnumStringValue(this Enum flags)
         {
-            var info = value.GetType().GetField(value.ToString());
+#if NET40
+            if (Attribute.IsDefined(flags.GetType(), typeof(FlagsAttribute)))
+#else
+            if (flags.GetType().GetTypeInfo().GetCustomAttributes(true).OfType<FlagsAttribute>().Any())
+#endif
+            {
+                var text = getEnumFlagsText(flags);
+                if (!string.IsNullOrWhiteSpace(text))
+                {
+                    return text;
+                }
+            }
+            return getEnumValueText(flags);
+        }
 
-            var displayName = info.GetCustomAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
-            if (displayName != null) return displayName.DisplayName;
+        private static string getEnumFlagsText(Enum flags)
+        {
+            const char leftToRightSeparator = ',';
+            const char rightToRightSeparator = '،';
 
-            var description = info.GetCustomAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
-            if (description != null) return description.Description;
+            var sb = new StringBuilder();
+            var items = Enum.GetValues(flags.GetType());
+            foreach (var value in items)
+            {
+                if (flags.HasFlag((Enum)value) && Convert.ToInt64((Enum)value) != 0)
+                {
+                    string text = getEnumValueText((Enum)value);
+                    var separator = text.ContainsRtlText() ? rightToRightSeparator : leftToRightSeparator;
+                    sb.Append(text).Append(separator).Append(" ");
+                }
+            }
 
-            return value.ToString();
+            return sb.ToString().Trim().TrimEnd(leftToRightSeparator).TrimEnd(rightToRightSeparator);
+        }
+
+        private static string getEnumValueText(Enum value)
+        {
+            var text = value.ToString();
+            var info = value.GetType().GetField(text);
+
+            var description = info?.GetCustomAttributes(true).OfType<DescriptionAttribute>().FirstOrDefault();
+            if (description != null)
+            {
+                return description.Description;
+            }
+
+            var displayName = info?.GetCustomAttributes(true).OfType<DisplayNameAttribute>().FirstOrDefault();
+            if (displayName != null)
+            {
+                return displayName.DisplayName;
+            }
+
+            var display = info?.GetCustomAttributes(true).OfType<DisplayAttribute>().FirstOrDefault();
+            if (display != null)
+            {
+                return display.Name;
+            }
+
+            return text;
         }
 
         /// <summary>

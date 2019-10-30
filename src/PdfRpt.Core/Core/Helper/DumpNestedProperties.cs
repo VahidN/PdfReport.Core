@@ -30,11 +30,17 @@ namespace PdfRpt.Core.Helper
                 var dataValue = propertyGetter.GetterFunc(data);
                 var name = string.Format("{0}{1}", parent, propertyGetter.Name);
                 var propertyType = propertyGetter.PropertyType;
+                var underlyingType = Nullable.GetUnderlyingType(propertyType);
+                var isNullable = underlyingType != null;
+                if (isNullable)
+                {
+                    propertyType = underlyingType;
+                }
 
                 if (dataValue == null)
                 {
                     var nullDisplayText = propertyGetter.MemberInfo.GetNullDisplayTextAttribute();
-                    if (isNullableType(propertyType) && string.IsNullOrWhiteSpace(nullDisplayText))
+                    if (isNullable && string.IsNullOrWhiteSpace(nullDisplayText))
                     {
                         nullDisplayText = null;
                     }
@@ -111,7 +117,5 @@ namespace PdfRpt.Core.Helper
                    !string.IsNullOrEmpty(type.Namespace) &&
                    !type.Namespace.StartsWith("System.", StringComparison.OrdinalIgnoreCase);
         }
-
-        private static bool isNullableType(Type type) => Nullable.GetUnderlyingType(type) != null;
     }
 }
