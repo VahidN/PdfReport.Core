@@ -19,7 +19,9 @@ PdfReport.Core supports wide range of the data sources from dynamic lists to in 
 Install via NuGet
 -----------------
 To install PdfReport, run the following command in the Package Manager Console:
+
 [![Nuget](https://img.shields.io/nuget/v/PdfRpt.Core)](https://github.com/VahidN/PdfReport.Core)
+
 ```
 PM> Install-Package PdfRpt.Core
 ```
