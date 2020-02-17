@@ -35,7 +35,7 @@ namespace PdfRpt.Core.FunctionalTests
             })
              .DefaultFonts(fonts =>
              {
-                 fonts.Path(System.IO.Path.Combine(TestUtils.GetBaseDir(), "fonts" ,"irsans.ttf"),
+                 fonts.Path(System.IO.Path.Combine(TestUtils.GetBaseDir(), "fonts", "irsans.ttf"),
                             TestUtils.GetTahomaFontPath());
                  fonts.Size(9);
                  fonts.Color(System.Drawing.Color.Black);
@@ -58,7 +58,10 @@ namespace PdfRpt.Core.FunctionalTests
                          // TotalPagesNumber is a custom image.
                          var page = string.Format("صفحه {0} از <img src='TotalPagesNumber' />", pageFooter.CurrentPageNumber);
                          var date = PersianDate.ToPersianDateTime(DateTime.Now, "/", true);
-                         return string.Format(@"<table style='font-size:9pt;font-family:tahoma;'>
+                         return string.Format(@"<table style='font-size:8pt;font-family:tahoma;'>
+						  								<tr>
+    														<td align='center' bgcolor='#00FF00' colspan='2'>آزمايش</td>
+ 													    </tr>
 														<tr>
 															<td width='50%' align='center'>{0}</td>
 															<td width='50%' align='center'>{1}</td>
