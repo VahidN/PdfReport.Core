@@ -25,6 +25,7 @@ namespace PdfRpt.Core.FunctionalTests
             {
                 doc.RunDirection(PdfRunDirection.RightToLeft);
                 doc.Orientation(PageOrientation.Portrait);
+                doc.DocumentMargins(new DocumentMargins { Bottom = 100, Left = 36, Right = 36, Top = 36 });
                 doc.PageSize(PdfPageSize.A4);
                 doc.DocumentMetadata(new DocumentMetadata { Author = "Vahid", Application = "PdfRpt", Keywords = "Test", Subject = "Test Rpt", Title = "Test" });
                 doc.Compression(new CompressionSettings
