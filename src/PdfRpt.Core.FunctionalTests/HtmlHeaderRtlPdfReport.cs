@@ -64,8 +64,8 @@ namespace PdfRpt.Core.FunctionalTests
     														<td align='center' bgcolor='#00FF00' colspan='2'>آزمايش</td>
  													    </tr>
 														<tr>
-															<td width='50%' align='center'>{0}</td>
-															<td width='50%' align='center'>{1}</td>
+															<td width='50%' align='left'>{0}</td>
+															<td width='50%' align='right'>{1}</td>
 														 </tr>
 												</table>", page, date);
                      });

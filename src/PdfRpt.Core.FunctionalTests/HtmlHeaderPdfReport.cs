@@ -27,6 +27,7 @@ namespace PdfRpt.Core.FunctionalTests
                 doc.Orientation(PageOrientation.Portrait);
                 doc.PageSize(PdfPageSize.A4);
                 doc.DocumentMetadata(new DocumentMetadata { Author = "Vahid", Application = "PdfRpt", Keywords = "Test", Subject = "Test Rpt", Title = "Test" });
+                doc.DocumentMargins(new DocumentMargins { Bottom = 50, Left = 36, Right = 36, Top = 36 });
                 doc.Compression(new CompressionSettings
                 {
                     EnableCompression = true,
@@ -62,8 +63,8 @@ namespace PdfRpt.Core.FunctionalTests
     														<td align='center' bgcolor='#00FF00' colspan='2'>Hello</td>
  													    </tr>
 														<tr>
-															<td width='50%' align='center'>{0}</td>
-															<td width='50%' align='center'>{1}</td>
+															<td width='50%' align='left'>{0}</td>
+															<td width='50%' align='right'>{1}</td>
 														 </tr>
 												</table>", page, date);
                      });
