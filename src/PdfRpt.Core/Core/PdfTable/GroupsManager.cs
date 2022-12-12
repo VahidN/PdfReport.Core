@@ -228,6 +228,7 @@ namespace PdfRpt.Core.PdfTable
             if (shouldCheckOneGroupPerPage) showOneGroupPerPage();
             renderGroupHeader(groupHeaderRowCellsData);
             initMainTable();
+            repeatCustomGroupHeader(groupHeaderRowCellsData);
             RowsManager.TableInitAddHeaderAndFooter();
             reset();
         }
@@ -327,9 +328,11 @@ namespace PdfRpt.Core.PdfTable
         {
             applySpacingThreshold();
 
-            if (SharedData.Header == null) return;
-            var groupHeader = SharedData.Header.RenderingGroupHeader(SharedData.PdfDoc, SharedData.PdfWriter, row.ToList(), SharedData.ColumnCellsSummaryData);
-            if (groupHeader == null) return;
+            var groupHeader = getGroupHeader(row);
+            if (groupHeader == null)
+            {
+                return;
+            }
 
             if (SharedData.ShouldWrapTablesInColumns)
             {
@@ -339,6 +342,31 @@ namespace PdfRpt.Core.PdfTable
             {
                 SharedData.PdfDoc.Add(groupHeader);
             }
+        }
+
+        private void repeatCustomGroupHeader(IEnumerable<CellData> row)
+        {
+            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage == false) return;
+            
+            var groupHeader = getGroupHeader(row);
+            if (groupHeader == null)
+            {
+                return;
+            }
+            
+            var cell = new PdfPCell(groupHeader)
+                       {
+                           Border = 0,
+                           Colspan = SharedData.ColumnsCount,
+                       };
+            MainTable.AddCell(cell);            
+        }
+
+        private PdfGrid getGroupHeader(IEnumerable<CellData> row)
+        {
+            if (SharedData.Header == null) return null;
+            return SharedData.Header.RenderingGroupHeader(SharedData.PdfDoc, SharedData.PdfWriter, row.ToList(),
+                                                                     SharedData.ColumnCellsSummaryData);
         }
 
         private void applySpacingThreshold()

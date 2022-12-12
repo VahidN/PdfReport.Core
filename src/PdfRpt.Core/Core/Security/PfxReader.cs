@@ -19,8 +19,9 @@ namespace PdfRpt.Core.Security
         public static PfxData ReadCertificate(string pfxPath, string pfxPassword)
         {
             using (var stream = new FileStream(pfxPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                var pkcs12Store = new Pkcs12Store(stream, pfxPassword.ToCharArray());
+            {                
+                var pkcs12Store = new Pkcs12StoreBuilder().Build();
+                pkcs12Store.Load(stream, pfxPassword.ToCharArray());
                 var alias = findThePublicKey(pkcs12Store);
                 var asymmetricKeyParameter = pkcs12Store.GetKey(alias).Key;
                 var chain = constructChain(pkcs12Store, alias);

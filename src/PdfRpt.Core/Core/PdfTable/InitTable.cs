@@ -216,6 +216,13 @@ namespace PdfRpt.Core.PdfTable
             applyPageSummary();
             applyShowMainTableHeaderRow();
             setAdditionalHeadingCellsRows();
+            setRepeatGroupHeaderRow();
+        }
+
+        private void setRepeatGroupHeaderRow()
+        {
+            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage == false) return;
+            _headerRows++;
         }
 
         private void setAdditionalHeadingCellsRows()

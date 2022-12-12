@@ -51,6 +51,11 @@ namespace PdfRpt.Core.Contracts
         public bool ShowAllGroupsSummaryRow { set; get; }
 
         /// <summary>
+        /// Sets the visibility of the each group's main table's header row per each page
+        /// </summary>
+        public bool RepeatGroupHeaderRowPerPage { set; get; }
+        
+        /// <summary>
         /// ctor.
         /// </summary>
         public GroupsPreferences()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Versioning;
 using iTextSharp.text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OxyPlot;
@@ -18,6 +19,7 @@ using PageOrientation = PdfRpt.Core.Contracts.PageOrientation;
 namespace PdfRpt.Core.FunctionalTests
 {
     [TestClass]
+    [SupportedOSPlatform("windows")]
     public class ChartImagePdfReport
     {
         [TestMethod]

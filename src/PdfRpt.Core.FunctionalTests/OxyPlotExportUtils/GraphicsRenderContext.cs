@@ -15,6 +15,7 @@ using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.IO;
 using System.Linq;
+using System.Runtime.Versioning;
 using OxyPlot;
 
 namespace PdfRpt.Core.FunctionalTests.OxyPlotExportUtils
@@ -22,6 +23,7 @@ namespace PdfRpt.Core.FunctionalTests.OxyPlotExportUtils
     /// <summary>
     /// The graphics render context.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class GraphicsRenderContext : RenderContextBase, IDisposable
     {
         /// <summary>

@@ -9,6 +9,7 @@
 
 using System.Drawing;
 using System.IO;
+using System.Runtime.Versioning;
 using OxyPlot;
 using ImageFormat = System.Drawing.Imaging.ImageFormat;
 
@@ -17,6 +18,7 @@ namespace PdfRpt.Core.FunctionalTests.OxyPlotExportUtils
     /// <summary>
     /// Provides functionality to export plots to png.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class PngExporter : IExporter
     {
         /// <summary>

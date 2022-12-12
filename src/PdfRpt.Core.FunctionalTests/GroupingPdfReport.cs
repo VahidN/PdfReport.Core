@@ -61,6 +61,7 @@ namespace PdfRpt.Core.FunctionalTests
                  table.ColumnsWidthsType(TableColumnWidthType.Relative);
                  table.GroupsPreferences(new GroupsPreferences
                  {
+                     RepeatGroupHeaderRowPerPage = true,
                      GroupType = GroupType.HideGroupingColumns,
                      RepeatHeaderRowPerGroup = true,
                      ShowOneGroupPerPage = false,
@@ -75,12 +76,12 @@ namespace PdfRpt.Core.FunctionalTests
              {
                  var listOfRows = new List<Employee>();
                  var rnd = new Random();
-                 for (int i = 0; i < 170; i++)
+                 for (int i = 0; i < 270; i++)
                  {
                      listOfRows.Add(
                          new Employee
                          {
-                             Age = rnd.Next(25, 35),
+                             Age = rnd.Next(30, 32),
                              Id = i + 1000,
                              Salary = rnd.Next(1000, 4000),
                              Name = "Employee " + i,

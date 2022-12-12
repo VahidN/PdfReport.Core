@@ -9,6 +9,7 @@
 
 using System;
 using System.Drawing;
+using System.Runtime.Versioning;
 using OxyPlot;
 
 namespace PdfRpt.Core.FunctionalTests.OxyPlotExportUtils
@@ -16,6 +17,7 @@ namespace PdfRpt.Core.FunctionalTests.OxyPlotExportUtils
     /// <summary>
     /// Extension method used to convert to/from Windows/Windows.Media classes.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public static class ConverterExtensions
     {
         /// <summary>
