@@ -109,6 +109,7 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(0);
                      column.Width(20);
                      column.HeaderCell("#");
+                     column.AddHeadingCell(string.Empty, mergeHeaderCell: false);//------- Extra Header Row - 2
                  });
 
                  columns.AddColumn(column =>
@@ -118,11 +119,10 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(1);
                      column.Width(20);
                      column.HeaderCell("Department");
-                     column.Group(
-                     (val1, val2) =>
-                     {
-                         return val1.ToString() == val2.ToString();
-                     });
+                     column.Group((val1, val2) =>
+                                  {
+                                      return val1.ToString() == val2.ToString();
+                                  });
                  });
 
                  columns.AddColumn(column =>
@@ -132,11 +132,10 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(2);
                      column.Width(20);
                      column.HeaderCell("Age");
-                     column.Group(
-                     (val1, val2) =>
-                     {
-                         return (int)val1 == (int)val2;
-                     });
+                     column.Group((val1, val2) =>
+                                  {
+                                      return (int)val1 == (int)val2;
+                                  });
                  });
 
                  columns.AddColumn(column =>
@@ -147,6 +146,7 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(3);
                      column.Width(20);
                      column.HeaderCell("Id");
+                     column.AddHeadingCell(string.Empty, mergeHeaderCell: false);//------- Extra Header Row - 2
                  });
 
                  columns.AddColumn(column =>
@@ -157,6 +157,7 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(4);
                      column.Width(20);
                      column.HeaderCell("Name");
+                     column.AddHeadingCell(string.Empty, mergeHeaderCell: false);//------- Extra Header Row - 2
                  });
 
                  columns.AddColumn(column =>
@@ -167,6 +168,7 @@ namespace PdfRpt.Core.FunctionalTests
                      column.Order(5);
                      column.Width(20);
                      column.HeaderCell("Salary");
+                     column.AddHeadingCell(string.Empty, mergeHeaderCell: false);//------- Extra Header Row - 2
                      column.ColumnItemsTemplate(template =>
                      {
                          template.TextBlock();

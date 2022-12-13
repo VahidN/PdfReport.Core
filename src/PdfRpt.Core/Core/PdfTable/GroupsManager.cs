@@ -346,7 +346,7 @@ namespace PdfRpt.Core.PdfTable
 
         private void repeatCustomGroupHeader(IEnumerable<CellData> row)
         {
-            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage == false) return;
+            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage != true) return;
             
             var groupHeader = getGroupHeader(row);
             if (groupHeader == null)

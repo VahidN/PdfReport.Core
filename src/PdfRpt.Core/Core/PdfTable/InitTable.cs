@@ -221,7 +221,8 @@ namespace PdfRpt.Core.PdfTable
 
         private void setRepeatGroupHeaderRow()
         {
-            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage == false) return;
+            if(!SharedData.IsGroupingEnabled) return;
+            if(SharedData.PageSetup.GroupsPreferences?.RepeatGroupHeaderRowPerPage != true) return;
             _headerRows++;
         }
 
