@@ -58,7 +58,7 @@ namespace PdfRpt.Core.FunctionalTests
                          // TotalPagesNumber is a custom image.
                          var page = string.Format("Page {0} Of <img src='TotalPagesNumber' />", pageFooter.CurrentPageNumber);
                          var date = DateTime.Now.ToString("MM/dd/yyyy");
-                         return string.Format(@"<table style='font-size:9pt;font-family:tahoma;'>
+                         return string.Format(@"<table style='width: 100%;font-size:9pt;font-family:tahoma;'>
 						  								<tr>
     														<td align='center' bgcolor='#00FF00' colspan='2'>Hello</td>
  													    </tr>
