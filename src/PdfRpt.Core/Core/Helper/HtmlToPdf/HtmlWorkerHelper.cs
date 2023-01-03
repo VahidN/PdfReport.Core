@@ -1,4 +1,5 @@
 ﻿using System;
+using System.util;
 using System.Collections;
 using System.IO;
 using iTextSharp.text;
@@ -67,7 +68,7 @@ namespace PdfRpt.Core.Helper.HtmlToPdf
             unicodeFontProvider.DefaultEmbedding = BaseFont.EMBEDDED;
             unicodeFontProvider.DefaultEncoding = BaseFont.IDENTITY_H;
 
-            var props = new Hashtable
+            var props = new NullValueDictionary<string, object>
             {
                 { "img_provider", new HtmlImageFactory(this.PdfElement) },
                 { "font_factory", unicodeFontProvider } // Always use Unicode fonts

@@ -28,7 +28,7 @@ namespace PdfRpt.Core.FunctionalTests
                     var doc = new Document(iTextSharp.text.PageSize.A4);
                     var writer = PdfWriter.GetInstance(doc, outputFileStream);
                     doc.Open();
-                    doc.Add(new Paragraph { $"Reproduce ReopenForReading Bug : Loop {i}" });
+                    doc.Add(new Phrase($"Reproduce ReopenForReading Bug : Loop {i}"));
                     doc.Close();
                 }
                 generatedFiles[i] = filename;

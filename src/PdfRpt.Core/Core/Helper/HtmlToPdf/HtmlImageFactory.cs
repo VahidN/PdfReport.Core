@@ -1,4 +1,5 @@
 ﻿using System;
+using System.util;
 using System.Collections;
 using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
@@ -22,7 +23,7 @@ namespace PdfRpt.Core.Helper.HtmlToPdf
         /// <summary>
         /// Returns a PDF image
         /// </summary>
-        public Image GetImage(string src, Hashtable h, ChainedProperties cprops, IDocListener doc)
+        public Image GetImage(string src, INullValueDictionary<string, string> h, ChainedProperties cprops, IDocListener doc)
         {
             if(src.Equals("TotalPagesNumber", StringComparison.OrdinalIgnoreCase))
             {
