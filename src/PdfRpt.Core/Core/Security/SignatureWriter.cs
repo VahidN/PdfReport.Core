@@ -10,24 +10,6 @@ using PdfRpt.Core.Helper;
 namespace PdfRpt.Core.Security
 {
     /// <summary>
-    /// CustomPdfReader to be able to work with streams.
-    /// </summary>
-    public class CustomPdfReader : PdfReader
-    {
-
-        /// <summary>
-        /// CustomPdfReader to be able to work with streams.
-        /// </summary>
-        public CustomPdfReader(Stream isp, X509Certificate certificate, ICipherParameters certificateKey)
-        {
-            this.Certificate = certificate;
-            this.CertificateKey = certificateKey;
-            this.Tokens = new PrTokeniser(new RandomAccessFileOrArray(isp));
-            ReadPdf();
-        }
-    }
-
-    /// <summary>
     /// Applies a digital signature to a document
     /// </summary>
     public class SignatureWriter
@@ -139,7 +121,7 @@ namespace PdfRpt.Core.Security
                             outputPdfStream, '\0', null, SignatureData.CertificateFile.AppendSignature);
                 tryAddSignature(stamper);
                 stamper.Close();
-                buffer = outputPdfStream.GetBuffer();
+                buffer = outputPdfStream.ToArray();
             }
 
             inputPdfStream = inputPdfStream.ReopenForWriting();
@@ -155,11 +137,11 @@ namespace PdfRpt.Core.Security
             using (var outputPdfStream = new MemoryStream())
             {
                 var stamper = PdfStamper.CreateSignature(
-                    new CustomPdfReader(inputPdfStream, pfxData.X509PrivateKeys[0], pfxData.PublicKey),
+                    new PdfReader(inputPdfStream, pfxData.X509PrivateKeys[0], pfxData.PublicKey),
                     outputPdfStream, '\0', null, SignatureData.CertificateFile.AppendSignature);
                 tryAddSignature(stamper);
                 stamper.Close();
-                buffer = outputPdfStream.GetBuffer();
+                buffer = outputPdfStream.ToArray();
             }
 
             inputPdfStream.Position = 0;
@@ -200,7 +182,7 @@ namespace PdfRpt.Core.Security
         private void addSignature(Stream inputPdfStream, Stream outputPdfStream, PfxData pfxData)
         {
             var stamper = PdfStamper.CreateSignature(
-                new CustomPdfReader(inputPdfStream, pfxData.X509PrivateKeys[0], pfxData.PublicKey),
+                new PdfReader(inputPdfStream, pfxData.X509PrivateKeys[0], pfxData.PublicKey),
                 outputPdfStream, '\0', null, SignatureData.CertificateFile.AppendSignature);
             tryAddSignature(stamper);
             stamper.Close();

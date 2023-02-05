@@ -134,7 +134,10 @@ namespace PdfRpt.Core.Security
                 readPassword = Encoding.UTF8.GetBytes(DocumentSecurity.EncryptionPreferences.PasswordEncryption.ReadPassword);
             }
             var editPassword = Encoding.UTF8.GetBytes(DocumentSecurity.EncryptionPreferences.PasswordEncryption.EditPassword);
-            PdfWriter.SetEncryption(readPassword, editPassword, permissions, PdfWriter.STRENGTH128BITS);
+            PdfWriter.SetEncryption(readPassword, 
+                                    editPassword, 
+                                    permissions,
+                                    PdfWriter.ENCRYPTION_AES_256_V3);
         }
 
         private void setPublicKeyEncryption(List<int> permissionsList)
@@ -146,8 +149,7 @@ namespace PdfRpt.Core.Security
             PdfWriter.SetEncryption(
                       certs: certs.X509PrivateKeys,
                       permissions: permissionsList.ToArray(),
-                      encryptionType: PdfWriter.ENCRYPTION_AES_128);
-
+                      encryptionType: PdfWriter.ENCRYPTION_AES_256_V3);
         }
 
         private void signPasswordEncryption(Stream pdfStreamOutput)
