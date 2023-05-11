@@ -71,7 +71,7 @@ namespace PdfRpt.Core.Helper
 
             var pdfDictionary = new PdfDictionary();
             pdfDictionary.Put(PdfName.Moddate, new PdfDate(DateTime.Now));
-            var fs = PdfFileSpecification.FileEmbedded(_sharedData.PdfWriter, null, exporter.FileName, data, true, null, pdfDictionary);
+            var fs = PdfFileSpecification.FileEmbedded(_sharedData.PdfWriter, "", exporter.FileName, data, true, null, pdfDictionary);
             _sharedData.PdfWriter.AddFileAttachment(exporter.Description, fs);
         }
     }
