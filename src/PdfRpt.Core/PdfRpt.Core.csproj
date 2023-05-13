@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>PdfReport.Core is a code first reporting engine, which is built on top of the iTextSharp.LGPLv2.Core and EPPlus.Core libraries.</Description>
-    <VersionPrefix>1.5.4</VersionPrefix>
+    <VersionPrefix>1.5.5</VersionPrefix>
     <Authors>Vahid Nasiri</Authors>
     <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -9,7 +9,7 @@
     <PackageId>PdfRpt.Core</PackageId>
     <PackageTags>PdfReport;Excel;Export;iTextSharp;PDF;Report;Reporting;Persian;.NET Core;aspnetcore</PackageTags>
     <PackageProjectUrl>https://github.com/VahidN/PdfReport.Core</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.gnu.org/licenses/old-licenses/lgpl-2.0-standalone.html</PackageLicenseUrl>
+    <PackageLicenseExpression>LGPL-2.0-only</PackageLicenseExpression>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
@@ -34,13 +34,13 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.0.0" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.2" />
     <PackageReference Include="EPPlus" Version="[4.5.3.3, 5)" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.0.0" />
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.0" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.4.2" />
     <PackageReference Include="EPPlus" Version="[4.5.3.3, 5)" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
