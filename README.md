@@ -8,7 +8,7 @@ PdfReport.Core is a code first reporting engine, which is built on top of the [i
 
 PdfReport.Core supports wide range of the data sources from dynamic lists to in memory strongly typed lists without needing the database. It saves your time from searching and learning a lot of tips and tricks of iTextSharp and EPPlus libraries. It's designed to be compatible with RTL languages.
 
-![sample PDF report](https://github.com/VahidN/PdfReport.Core/tree/master/src/PdfRpt.Core.FunctionalTests/Images/sample.png)
+![sample PDF report](https://github.com/VahidN/PdfReport.Core/blob/master/src/PdfRpt.Core.FunctionalTests/Images/sample.png?raw=true)
 
 
 
