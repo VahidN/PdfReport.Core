@@ -35,13 +35,13 @@
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.7.4" />
-    <PackageReference Include="EPPlus" Version="[4.5.3.3, 5)" />
+    <PackageReference Include="EPPlus" Version="8.0.8" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.7.4" />
-    <PackageReference Include="EPPlus" Version="[4.5.3.3, 5)" />
+    <PackageReference Include="EPPlus" Version="8.0.8" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
   </ItemGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
