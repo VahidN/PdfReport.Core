@@ -16,7 +16,7 @@ namespace PdfRpt
         private readonly string _defaultFontPath;
         private readonly Font _mainFont;
         private readonly Font _defaultFont;
-        private static readonly Object _syncLock = new Object();
+        private static readonly Lock _syncLock = LockFactory.Create();
 
         /// <summary>
         /// Sets registered font's name.
