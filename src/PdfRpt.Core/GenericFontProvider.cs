@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using PdfRpt.Core.Contracts;
 using PdfRpt.Core.Helper;
+using System.Collections.Generic;
 
 namespace PdfRpt
 {
