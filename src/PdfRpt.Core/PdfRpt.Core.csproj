@@ -39,15 +39,7 @@
 		<Using Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net9.0'))" Alias="Lock" Include="Backport.System.Threading.Lock" />
 		<Using Alias="LockFactory" Include="Backport.System.Threading.LockFactory" />
 	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' ">
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
-		<PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
-		<PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
-		<PackageReference Include="iTextSharp.LGPLv2.Core" Version="3.7.9" />
-		<PackageReference Include="EPPlus" Version="[4.5.3.3, 5)" />
-	</ItemGroup>
-	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net9.0' or '$(TargetFramework)' == 'netstandard2.0' ">
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
 		<PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
