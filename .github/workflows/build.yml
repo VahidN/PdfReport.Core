@@ -5,19 +5,30 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: windows-2022
+    runs-on: windows-latest
+    environment: release
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
     - uses: actions/checkout@v7
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v5
+      uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: 10.0.x
+        dotnet-version: 11.0.x
     - name: Build PdfRpt.Core lib
       run: dotnet build ./src/PdfRpt.Core/PdfRpt.Core.csproj --configuration Release
 
+    - name: NuGet Login via OIDC
+      if: github.event_name == 'push'
+      id: login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
     - name: Push Package to NuGet.org
       if: github.event_name == 'push'
-      run: dotnet nuget push **\*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
+      run: dotnet nuget push **\*.nupkg -k ${{ steps.login.outputs.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --skip-duplicate
 
 
